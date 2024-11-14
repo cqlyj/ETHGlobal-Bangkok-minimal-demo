@@ -125,7 +125,7 @@ contract Campaign is ERC721URIStorage, Ownable {
                            EXTERNAL FUNCTIONS
     //////////////////////////////////////////////////////////////*/
 
-    // This will create a campaign and when time passes, Chainlink will mint the NFT, which implies that the campaign is created
+    // This will create a campaign and when time passes, creator can activate the campaign or revert it
     function createCampaign(
         address to,
         uint256 timeInterval,
