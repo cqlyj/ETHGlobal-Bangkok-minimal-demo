@@ -6,7 +6,7 @@ import {ChainlinkCreator} from "src/ChainlinkCreator.sol";
 
 contract DeployChainlinkCreator is Script {
     address public constant ACCOUNT_IMPLEMENTATION_ADDRESS = 0xa6eEE68A4324F8DA953dA58DbC9C05781EbB04F9;
-    address public constant REGISTRY_ADDRESS = 0x0094535d9E395a92dD4e49A18DA4827B90D4AaDD;
+    address public constant REGISTRY_ADDRESS = 0x14Aef3d49F94E380b7f29897e81F9D092BEEDF4E;
 
     function run() external returns (ChainlinkCreator) {
         vm.startBroadcast();
