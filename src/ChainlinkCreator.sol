@@ -14,7 +14,7 @@ struct Log {
     bytes data; // Data of the log
 }
 
-event AccountCreated(address indexed to,address indexed campaign, uint256 tokenId);
+event AccountCreated(address indexed to,address indexed campaign, uint256 tokenId, address indexed account);
 
 interface ILogAutomation {
     function checkLog(
@@ -51,13 +51,12 @@ contract ChainlinkCreator is ILogAutomation {
     }
 
     function performUpkeep(bytes calldata performData) external override {
-        // createAccount(address implementation, bytes32 salt, uint256 chainId, address tokenContract, uint256 tokenId)
-        (address user,address campaign, uint256 tokenId) = abi.decode(
+        (address user, address campaign, uint256 tokenId) = abi.decode(
             performData,
-            (address,address, uint256)
+            (address, address, uint256)
         );
 
-        registry.createAccount(
+        address account = registry.createAccount(
             implementationContractAddress,
             salt,
             block.chainid,
@@ -65,7 +64,7 @@ contract ChainlinkCreator is ILogAutomation {
             tokenId
         );
 
-        emit AccountCreated(user,campaign,tokenId);
+        emit AccountCreated(user,campaign,tokenId, account);
     }
 
     function bytes32ToAddress(bytes32 _address) public pure returns (address) {
