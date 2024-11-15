@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
-import {AccountImplementation} from "./AccountImplementation.sol";
+import {IAccountImplementation} from "../src/interfaces/IAccountImplementation.sol";
 
 struct Log {
     uint256 index; // Index of the log in the block
@@ -23,14 +23,6 @@ interface ILogAutomation {
 }
 
 contract ChainlinkMinter is ILogAutomation {
-    AccountImplementation public accountImplementation;
-
-    constructor(address _accountImplementationAddress) {
-        accountImplementation = AccountImplementation(
-            payable(_accountImplementationAddress)
-        );
-    }
-
     function checkLog(
         Log calldata log,
         bytes memory
@@ -38,16 +30,17 @@ contract ChainlinkMinter is ILogAutomation {
         upkeepNeeded = true;
         address user = bytes32ToAddress(log.topics[1]);
         address campaign = bytes32ToAddress(log.topics[2]);
-        performData = abi.encode(user, campaign);
+        address account = bytes32ToAddress(log.topics[3]);
+        performData = abi.encode(user, campaign, account);
     }
 
     function performUpkeep(bytes calldata performData) external override {
-        (address user, address campaign) = abi.decode(
+        (address user, address campaign, address account) = abi.decode(
             performData,
-            (address, address)
+            (address, address, address)
         );
-        accountImplementation.initialize(user);
-        accountImplementation.mintInteractionNFT(campaign);
+        IAccountImplementation(account).initialize(user);
+        IAccountImplementation(account).mintInteractionNFT(campaign);
     }
 
     function bytes32ToAddress(bytes32 _address) public pure returns (address) {
