@@ -1,66 +1,7 @@
-## Foundry
-
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+campaign Contract Address: 0x5D552F1F20D9EAa005E15771647C2b6001ff02D1
+userEmitEvent Contract Address: 0x852C6C9D70Efa201068F8187Ab8bD6B260CbcE93
+accountImplementation Contract Address: 0xa6eEE68A4324F8DA953dA58DbC9C05781EbB04F9
+interactionNft Contract Address: 0x21484A80154D0d35eD30d0BA3F8B8d180d489368
+chainlink-minter Contract Address: 0xc4AF4399Cc447f8eAfdb8F08E8fF74F8d5157f81
+chainlink-creator Contract Address: 0xE1d33276538882236B7eE94743D7238Bae961CA5
+registry Contract Address: 0x14Aef3d49F94E380b7f29897e81F9D092BEEDF4E
