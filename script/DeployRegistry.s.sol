@@ -6,7 +6,7 @@ import {Registry} from "src/Registry.sol";
 
 contract DeployRegistry is Script {
     // update this!
-    address public constant CHAINLINK_MINTER = 0x2ae675f229efEAe01D4F0C12E5cD5218633600E4;
+    address public constant CHAINLINK_MINTER = 0xc4AF4399Cc447f8eAfdb8F08E8fF74F8d5157f81;
 
     function run() external returns (Registry) {
         vm.startBroadcast();
