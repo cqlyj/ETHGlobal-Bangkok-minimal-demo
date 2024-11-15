@@ -2,6 +2,8 @@
 pragma solidity 0.8.26;
 import {Registry} from "./Registry.sol";
 import {IAccountImplementation} from "../src/interfaces/IAccountImplementation.sol";
+import {DummyContract} from "./DummyContract.sol";
+import {ChainlinkMinter} from "./ChainlinkMinter.sol";
 
 struct Log {
     uint256 index; // Index of the log in the block
@@ -29,13 +31,19 @@ contract ChainlinkCreator is ILogAutomation {
     Registry public registry;
     address public implementationContractAddress;
     bytes32 public salt = bytes32(0);
+    ChainlinkMinter public chainlinkMinter;
+    DummyContract public dummyContract;
 
     constructor(
         address _registryAddress,
-        address _implementationContractAddress
+        address _implementationContractAddress,
+        address _chainlinkMinter,
+        address _dummyContract
     ) {
         registry = Registry(_registryAddress);
         implementationContractAddress = _implementationContractAddress;
+        chainlinkMinter = ChainlinkMinter(_chainlinkMinter);
+        dummyContract = DummyContract(_dummyContract);
     }
 
     function checkLog(
@@ -64,7 +72,10 @@ contract ChainlinkCreator is ILogAutomation {
             tokenId
         );
 
-        emit AccountCreated(user,campaign,tokenId, account);
+        dummyContract.setUser(user);
+        dummyContract.setCampaign(campaign);
+        dummyContract.setAccount(account);
+        chainlinkMinter.setAccountCreated(true);
     }
 
     function bytes32ToAddress(bytes32 _address) public pure returns (address) {
